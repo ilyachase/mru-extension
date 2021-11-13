@@ -1,6 +1,6 @@
 {
   "appName": {
-    "message": "Switch between two most recent tabs (MRU tabs switch)"
+    "message": "Switch between recent tabs (MRU tabs switch)"
   },
   "appDesc": {
     "message": "Use a keyboard shortcut to switch between two most recent tabs."
