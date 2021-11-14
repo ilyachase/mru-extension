@@ -7,7 +7,6 @@ async function getCurrentTab() {
 }
 
 chrome.runtime.onInstalled.addListener(() => {
-    chrome.storage.sync.set({color: tabs});
     getCurrentTab().then(tabInfo => tabs.push(tabInfo.id));
 });
 
