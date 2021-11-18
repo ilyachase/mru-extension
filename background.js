@@ -12,14 +12,17 @@ chrome.runtime.onInstalled.addListener(() => {
 
 chrome.tabs.onActivated.addListener(function (tabInfo) {
     if (tabs[0] === tabInfo.tabId) {
-        [tabs[0], tabs[1]] = [tabs[1], tabs[0]];
         return;
     }
 
-    tabs.push(tabInfo.tabId);
-    if (tabs.length > 2) {
-        tabs.shift();
+    tabs.unshift(tabInfo.tabId);
+    if (tabs.length > 100) {
+        tabs.pop();
     }
+});
+
+chrome.tabs.onRemoved.addListener(function () {
+    tabs.shift();
 });
 
 chrome.commands.onCommand.addListener(() => {
@@ -27,5 +30,6 @@ chrome.commands.onCommand.addListener(() => {
         return;
     }
 
-    chrome.tabs.update(tabs[0], {highlighted: true, active: true});
+    chrome.tabs.update(tabs[1], {highlighted: true, active: true});
+    [tabs[0], tabs[1]] = [tabs[1], tabs[0]];
 });
