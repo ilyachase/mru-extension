@@ -26,25 +26,26 @@ chrome.tabs.onActivated.addListener(async function (tabInfo) {
     let tabsHistory;
     await chrome.storage.local.get('tabsHistory').then(result => tabsHistory = result.tabsHistory);
 
-    if (tabsHistory[0] === tabInfo.tabId) {
-        return;
+    const foundIndex = tabsHistory.indexOf(tabInfo.tabId);
+    if (foundIndex !== -1) {
+        tabsHistory.splice(foundIndex, 1);
     }
 
     tabsHistory.unshift(tabInfo.tabId);
-    if (tabsHistory.length > 100) {
-        tabsHistory.pop();
-    }
 
     await chrome.storage.local.set({tabsHistory});
 });
 
-chrome.tabs.onRemoved.addListener(async function () {
+chrome.tabs.onRemoved.addListener(async function (tabId) {
     justRemoved = true;
 
     let tabsHistory;
     await chrome.storage.local.get('tabsHistory').then(result => tabsHistory = result.tabsHistory);
 
-    tabsHistory.shift();
+    const foundIndex = tabsHistory.indexOf(tabId);
+    if (foundIndex !== -1) {
+        tabsHistory.splice(foundIndex, 1);
+    }
 
     await chrome.storage.local.set({tabsHistory});
     justRemoved = false;
@@ -59,7 +60,4 @@ chrome.commands.onCommand.addListener(async () => {
     }
 
     await chrome.tabs.update(tabsHistory[1], {highlighted: true, active: true});
-    [tabsHistory[0], tabsHistory[1]] = [tabsHistory[1], tabsHistory[0]];
-
-    await chrome.storage.local.set({tabsHistory});
 });
