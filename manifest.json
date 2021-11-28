@@ -7,6 +7,9 @@
   "background": {
     "service_worker": "background.js"
   },
+  "permissions": [
+    "storage"
+  ],
   "commands": {
     "inject-script": {
       "suggested_key": "Alt+Q",
