@@ -1,4 +1,4 @@
-let justRemoved = false;
+let justRemoved = false, debug = false;
 
 const wait = () =>
     new Promise(resolve =>
@@ -14,6 +14,9 @@ async function getCurrentTab() {
 chrome.runtime.onInstalled.addListener(async () => {
     let tabsHistory = [];
     await getCurrentTab().then(tabInfo => tabsHistory.push(tabInfo.id));
+    if (debug) {
+        console.log(tabsHistory);
+    }
 
     await chrome.storage.local.set({tabsHistory});
 });
@@ -33,6 +36,10 @@ chrome.tabs.onActivated.addListener(async function (tabInfo) {
 
     tabsHistory.unshift(tabInfo.tabId);
 
+    if (debug) {
+        console.log(tabsHistory);
+    }
+
     await chrome.storage.local.set({tabsHistory});
 });
 
@@ -45,6 +52,10 @@ chrome.tabs.onRemoved.addListener(async function (tabId) {
     const foundIndex = tabsHistory.indexOf(tabId);
     if (foundIndex !== -1) {
         tabsHistory.splice(foundIndex, 1);
+    }
+
+    if (debug) {
+        console.log(tabsHistory);
     }
 
     await chrome.storage.local.set({tabsHistory});
