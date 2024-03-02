@@ -1,4 +1,4 @@
-let justRemoved = false, debug = false;
+let removingTabInProgress = false, debug = false;
 
 const wait = () =>
     new Promise(resolve =>
@@ -11,58 +11,78 @@ async function getCurrentTab() {
     return tab;
 }
 
-chrome.runtime.onInstalled.addListener(async () => {
-    let tabsHistory = [];
-    await getCurrentTab().then(tabInfo => tabsHistory.push(tabInfo.id));
+async function handleTabActivated(tabInfo) {
     if (debug) {
-        console.log(tabsHistory);
+        console.log('Tab activated: ' + tabInfo.tabId);
     }
 
-    await chrome.storage.local.set({tabsHistory});
-});
-
-chrome.tabs.onActivated.addListener(async function (tabInfo) {
-    while (justRemoved) {
+    while (removingTabInProgress) {
         await wait();
     }
 
     let tabsHistory;
     await chrome.storage.local.get('tabsHistory').then(result => tabsHistory = result.tabsHistory);
 
-    const foundIndex = tabsHistory.indexOf(tabInfo.tabId);
+    const foundIndex = tabsHistory.findIndex(historyTabInfo => historyTabInfo.tabId === tabInfo.tabId);
     if (foundIndex !== -1) {
         tabsHistory.splice(foundIndex, 1);
     }
 
-    tabsHistory.unshift(tabInfo.tabId);
+    tabsHistory.unshift(tabInfo);
 
     if (debug) {
-        console.log(tabsHistory);
+        console.log('handleTabActivated', tabsHistory);
     }
 
     await chrome.storage.local.set({tabsHistory});
+}
+
+chrome.runtime.onInstalled.addListener(async () => {
+    if (debug) {
+        console.log('Extension installed');
+    }
+
+    let tabsHistory = [];
+    await getCurrentTab().then(tabInfo => tabsHistory.push({tabId: tabInfo.id, windowId: tabInfo.windowId}));
+    if (debug) {
+        console.log('onInstalled', tabsHistory);
+    }
+
+    await chrome.storage.local.set({tabsHistory});
+});
+
+chrome.tabs.onActivated.addListener(async function (tabInfo) {
+    await handleTabActivated(tabInfo);
 });
 
 chrome.tabs.onRemoved.addListener(async function (tabId) {
-    justRemoved = true;
+    if (debug) {
+        console.log('Tab removed: ' + tabId);
+    }
 
+    while (removingTabInProgress) {
+        await wait();
+    }
+
+    removingTabInProgress = true;
     let tabsHistory;
     await chrome.storage.local.get('tabsHistory').then(result => tabsHistory = result.tabsHistory);
 
-    const foundIndex = tabsHistory.indexOf(tabId);
-    if (foundIndex !== -1) {
-        tabsHistory.splice(foundIndex, 1);
-    }
+    tabsHistory = tabsHistory.filter(historyTabInfo => historyTabInfo.tabId !== tabId);
 
     if (debug) {
-        console.log(tabsHistory);
+        console.log('tabs.onRemoved', tabsHistory);
     }
 
     await chrome.storage.local.set({tabsHistory});
-    justRemoved = false;
+    removingTabInProgress = false;
 });
 
 chrome.commands.onCommand.addListener(async () => {
+    if (debug) {
+        console.log('Hotkey pressed');
+    }
+
     let tabsHistory;
     await chrome.storage.local.get('tabsHistory').then(result => tabsHistory = result.tabsHistory);
 
@@ -70,5 +90,37 @@ chrome.commands.onCommand.addListener(async () => {
         return;
     }
 
-    await chrome.tabs.update(tabsHistory[1], {highlighted: true, active: true});
+    const currentWindow = await chrome.windows.getCurrent();
+    if (tabsHistory[1].windowId !== currentWindow.id) {
+        if (debug) {
+            console.log('Switching window to ' + tabsHistory[1].windowId);
+        }
+
+        await chrome.windows.update(tabsHistory[1].windowId, {focused: true});
+    }
+
+    await chrome.tabs.update(tabsHistory[1].tabId, {highlighted: true, active: true});
 });
+
+chrome.windows.onFocusChanged.addListener(async function (windowId) {
+    if (windowId === -1) {
+        if (debug) {
+            console.log('Window is -1, ignoring');
+        }
+        return;
+    }
+
+    if (debug) {
+        console.log('Window focused: ' + windowId);
+    }
+
+    let tabInfo = await getCurrentTab();
+    if (!tabInfo) {
+        if (debug) {
+            console.log('No tab found');
+        }
+        return;
+    }
+
+    await handleTabActivated({tabId: tabInfo.id, windowId: tabInfo.windowId});
+}, {windowTypes: ['normal']});
