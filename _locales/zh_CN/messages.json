@@ -1,0 +1,8 @@
+{
+  "appName": {
+    "message": "快速标签页切换"
+  },
+  "appDesc": {
+    "message": "使用Alt+Q在您最近的两个标签页之间即时切换。就像窗口的Alt+Tab，但用于Chrome标签页。"
+  }
+}

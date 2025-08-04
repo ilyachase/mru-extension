@@ -1,0 +1,34 @@
+⚡ Natychmiast przełączaj między dwoma ostatnimi kartami za pomocą prostego skrótu klawiszowego - jak Alt+Tab dla okien, ale dla kart Chrome!
+
+Idealne do porównywania stron, kopiowania informacji między kartami lub szybkiego przechodzenia tam i z powrotem podczas pracy. Nie potrzebujesz myszy, nie musisz klikać między kartami.
+
+✨ Funkcje:
+• Prosty skrót Alt+Q (⌥Q na Mac) - w pełni konfigurowalny
+• Przełączaj między ostatnimi 2 używanymi kartami natychmiast
+• Działa na wszystkich stronach internetowych
+• Lekkie i szybkie - bez wpływu na wydajność
+• Zero uprawnień wymaganych - całkowicie prywatne
+
+🚀 Jak używać:
+1. Zainstaluj rozszerzenie
+2. Naciśnij Alt+Q, aby przeskoczyć między dwoma ostatnimi kartami
+3. Dostosuj skrót w chrome://extensions/shortcuts jeśli potrzeba
+
+💡 Idealne do:
+• Porównywania informacji między dwiema stronami
+• Kopiowania danych z jednej karty do drugiej
+• Szybkich badań i sprawdzania faktów
+• Przechodzenia między dokumentami roboczymi
+• Każdego przepływu pracy wymagającego nawigacji tam i z powrotem
+
+⚙️ Zaawansowana Konfiguracja:
+Chcesz używać Ctrl+Tab zamiast tego? Możesz zmodyfikować plik ustawień Chrome:
+• Windows: Win+R → "notepad %LOCALAPPDATA%\Google\Chrome\User Data\Default\Preferences"
+• Linux: gedit ~/.config/google-chrome/Default/Preferences
+• Zmień wszystkie wystąpienia "Alt+Q" na "Ctrl+Tab"
+• Wyłącz synchronizację Chrome, aby zapobiec nadpisywaniu
+
+Jeśli powyższy sposób nie działa, postępuj zgodnie z instrukcjami w tym Gist: https://gist.github.com/ilyachase/49c7a6d1aa543d16568520560cfaf226
+
+To rozszerzenie jest darmowe i zawsze będzie. Jednak jeśli chcesz postawić autorowi kawę, będzie to bardzo docenione 🤗
+https://buymeacoffee.com/ilyachase

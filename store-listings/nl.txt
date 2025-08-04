@@ -1,0 +1,34 @@
+⚡ Schakel direct tussen je twee meest recente tabbladen met een eenvoudige sneltoets - net als Alt+Tab voor vensters, maar dan voor Chrome-tabbladen!
+
+Perfect voor het vergelijken van pagina's, kopiëren van informatie tussen tabbladen, of snel heen en weer gaan tijdens het werken. Geen muis nodig, geen klikken tussen tabbladen.
+
+✨ Functies:
+• Eenvoudige Alt+Q sneltoets (⌥Q op Mac) - volledig aanpasbaar
+• Schakel direct tussen je laatste 2 gebruikte tabbladen
+• Werkt op alle websites en pagina's
+• Lichtgewicht en snel - geen impact op prestaties
+• Geen toestemmingen vereist - volledig privé
+
+🚀 Hoe te gebruiken:
+1. Installeer de extensie
+2. Druk op Alt+Q om te springen tussen je twee meest recente tabbladen
+3. Pas de sneltoets aan in chrome://extensions/shortcuts indien nodig
+
+💡 Perfect voor:
+• Vergelijken van informatie tussen twee pagina's
+• Kopiëren van gegevens van het ene naar het andere tabblad
+• Snel onderzoek en feitencontrole
+• Schakelen tussen werkdocumenten
+• Elke workflow die heen-en-weer navigatie vereist
+
+⚙️ Geavanceerde Instelling:
+Wil je in plaats daarvan Ctrl+Tab gebruiken? Je kunt Chrome's instellingenbestand wijzigen:
+• Windows: Win+R → "notepad %LOCALAPPDATA%\Google\Chrome\User Data\Default\Preferences"
+• Linux: gedit ~/.config/google-chrome/Default/Preferences
+• Verander alle voorkomens van "Alt+Q" naar "Ctrl+Tab"
+• Schakel Chrome-synchronisatie uit om overschrijvingen te voorkomen
+
+Als bovenstaande manier niet voor je werkt, volg dan de instructies in deze Gist: https://gist.github.com/ilyachase/49c7a6d1aa543d16568520560cfaf226
+
+Deze extensie is gratis en zal dat altijd blijven. Als je de auteur echter een koffie wilt aanbieden, wordt dat zeer gewaardeerd 🤗
+https://buymeacoffee.com/ilyachase

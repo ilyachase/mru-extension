@@ -1,0 +1,34 @@
+⚡ Alterne instantaneamente entre suas duas abas mais recentes com um simples atalho de teclado - como Alt+Tab para janelas, mas para abas do Chrome!
+
+Perfeito para comparar páginas, copiar informações entre abas, ou alternar rapidamente durante o trabalho. Sem necessidade de mouse, sem clicar entre abas.
+
+✨ Recursos:
+• Atalho simples Alt+Q (⌥Q no Mac) - totalmente personalizável
+• Alterne entre suas últimas 2 abas usadas instantaneamente
+• Funciona em todos os sites e páginas
+• Leve e rápido - sem impacto na performance
+• Zero permissões necessárias - completamente privado
+
+🚀 Como usar:
+1. Instale a extensão
+2. Pressione Alt+Q para alternar entre suas duas abas mais recentes
+3. Personalize o atalho em chrome://extensions/shortcuts se necessário
+
+💡 Perfeito para:
+• Comparar informações entre duas páginas
+• Copiar dados de uma aba para outra
+• Pesquisa rápida e verificação de fatos
+• Alternar entre documentos de trabalho
+• Qualquer fluxo de trabalho que requer navegação ida e volta
+
+⚙️ Configuração Avançada:
+Quer usar Ctrl+Tab em vez disso? Você pode modificar o arquivo de configurações do Chrome:
+• Windows: Win+R → "notepad %LOCALAPPDATA%\Google\Chrome\User Data\Default\Preferences"
+• Linux: gedit ~/.config/google-chrome/Default/Preferences
+• Mude todas as ocorrências de "Alt+Q" para "Ctrl+Tab"
+• Desative a sincronização do Chrome para evitar sobrescritas
+
+Se o método acima não funcionar para você, siga as instruções neste Gist: https://gist.github.com/ilyachase/49c7a6d1aa543d16568520560cfaf226
+
+Esta extensão é gratuita e sempre será. No entanto, se você quiser comprar um café para o autor, será muito apreciado 🤗
+https://buymeacoffee.com/ilyachase

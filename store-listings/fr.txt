@@ -1,0 +1,34 @@
+⚡ Basculez instantanément entre vos deux onglets les plus récents avec un simple raccourci clavier - comme Alt+Tab pour les fenêtres, mais pour les onglets Chrome !
+
+Parfait pour comparer des pages, copier des informations entre onglets, ou faire des allers-retours rapides pendant le travail. Pas besoin de souris, pas de clic entre les onglets.
+
+✨ Fonctionnalités :
+• Raccourci simple Alt+Q (⌥Q sur Mac) - entièrement personnalisable
+• Basculez entre vos 2 derniers onglets utilisés instantanément
+• Fonctionne sur tous les sites web et pages
+• Léger et rapide - aucun impact sur les performances
+• Zéro permission requise - complètement privé
+
+🚀 Comment utiliser :
+1. Installez l'extension
+2. Appuyez sur Alt+Q pour basculer entre vos deux onglets les plus récents
+3. Personnalisez le raccourci dans chrome://extensions/shortcuts si nécessaire
+
+💡 Parfait pour :
+• Comparer des informations entre deux pages
+• Copier des données d'un onglet à un autre
+• Recherche rapide et vérification des faits
+• Naviguer entre des documents de travail
+• Tout flux de travail nécessitant une navigation d'avant en arrière
+
+⚙️ Configuration Avancée :
+Vous voulez utiliser Ctrl+Tab à la place ? Vous pouvez modifier le fichier de paramètres de Chrome :
+• Windows : Win+R → "notepad %LOCALAPPDATA%\Google\Chrome\User Data\Default\Preferences"
+• Linux : gedit ~/.config/google-chrome/Default/Preferences
+• Changez toutes les occurrences de "Alt+Q" en "Ctrl+Tab"
+• Désactivez la synchronisation Chrome pour éviter les remplacements
+
+Si la méthode ci-dessus ne fonctionne pas pour vous, suivez les instructions sur ce Gist : https://gist.github.com/ilyachase/49c7a6d1aa543d16568520560cfaf226
+
+Cette extension est gratuite et le restera toujours. Cependant, si vous voulez offrir un café à l'auteur, ce sera très apprécié 🤗
+https://buymeacoffee.com/ilyachase

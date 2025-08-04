@@ -1,0 +1,34 @@
+⚡ Passa istantaneamente tra le tue due schede più recenti con una semplice scorciatoia da tastiera - come Alt+Tab per le finestre, ma per le schede di Chrome!
+
+Perfetto per confrontare pagine, copiare informazioni tra schede, o andare avanti e indietro rapidamente mentre lavori. Non serve il mouse, non serve cliccare tra le schede.
+
+✨ Caratteristiche:
+• Scorciatoia semplice Alt+Q (⌥Q su Mac) - completamente personalizzabile
+• Passa tra le tue ultime 2 schede usate istantaneamente
+• Funziona su tutti i siti web e pagine
+• Leggero e veloce - nessun impatto sulle prestazioni
+• Zero permessi richiesti - completamente privato
+
+🚀 Come usare:
+1. Installa l'estensione
+2. Premi Alt+Q per saltare tra le tue due schede più recenti
+3. Personalizza la scorciatoia in chrome://extensions/shortcuts se necessario
+
+💡 Perfetto per:
+• Confrontare informazioni tra due pagine
+• Copiare dati da una scheda all'altra
+• Ricerca rapida e verifica dei fatti
+• Passare tra documenti di lavoro
+• Qualsiasi flusso di lavoro che richiede navigazione avanti e indietro
+
+⚙️ Configurazione Avanzata:
+Vuoi usare Ctrl+Tab invece? Puoi modificare il file delle impostazioni di Chrome:
+• Windows: Win+R → "notepad %LOCALAPPDATA%\Google\Chrome\User Data\Default\Preferences"
+• Linux: gedit ~/.config/google-chrome/Default/Preferences
+• Cambia tutte le occorrenze di "Alt+Q" in "Ctrl+Tab"
+• Disabilita la sincronizzazione di Chrome per prevenire sovrascritture
+
+Se il metodo sopra non funziona per te, segui le istruzioni in questo Gist: https://gist.github.com/ilyachase/49c7a6d1aa543d16568520560cfaf226
+
+Questa estensione è gratuita e lo sarà sempre. Tuttavia, se vuoi offrire un caffè all'autore, sarà molto apprezzato 🤗
+https://buymeacoffee.com/ilyachase

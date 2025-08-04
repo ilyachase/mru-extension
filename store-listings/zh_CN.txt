@@ -1,0 +1,34 @@
+⚡ 使用简单的键盘快捷键在您最近的两个标签页之间即时切换 - 就像窗口的Alt+Tab，但用于Chrome标签页！
+
+非常适合比较页面、在标签页间复制信息或工作时快速往返。无需鼠标，无需在标签页间点击。
+
+✨ 功能：
+• 简单的Alt+Q快捷键（Mac上为⌥Q）- 完全可自定义
+• 在您最后使用的2个标签页间即时切换
+• 适用于所有网站和页面
+• 轻量快速 - 不影响性能
+• 零权限要求 - 完全私密
+
+🚀 使用方法：
+1. 安装扩展程序
+2. 按Alt+Q在您最近的两个标签页间跳转
+3. 如需要可在chrome://extensions/shortcuts自定义快捷键
+
+💡 完美适用于：
+• 比较两个页面间的信息
+• 从一个标签页复制数据到另一个
+• 快速研究和事实核查
+• 在工作文档间切换
+• 任何需要来回导航的工作流程
+
+⚙️ 高级设置：
+想要使用Ctrl+Tab替代？您可以修改Chrome的设置文件：
+• Windows：Win+R → "notepad %LOCALAPPDATA%\Google\Chrome\User Data\Default\Preferences"
+• Linux：gedit ~/.config/google-chrome/Default/Preferences
+• 将所有"Alt+Q"出现的地方改为"Ctrl+Tab"
+• 禁用Chrome同步以防止覆盖
+
+如果上述方法对您不起作用，请按照此Gist中的说明操作：https://gist.github.com/ilyachase/49c7a6d1aa543d16568520560cfaf226
+
+此扩展程序免费且将永远免费。但是，如果您想请作者喝杯咖啡，将不胜感激 🤗
+https://buymeacoffee.com/ilyachase

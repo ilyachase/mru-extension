@@ -1,0 +1,34 @@
+⚡ Instantly switch between your two most recent tabs with a simple keyboard shortcut - just like Alt+Tab for windows, but for Chrome tabs!
+
+Perfect for comparing pages, copying information between tabs, or quickly going back and forth while working. No mouse needed, no clicking through tabs.
+
+✨ Features:
+• Simple Alt+Q shortcut (⌥Q on Mac) - fully customizable
+• Switch between your last 2 used tabs instantly
+• Works on all websites and pages
+• Lightweight and fast - no performance impact
+• Zero permissions required - completely private
+
+🚀 How to use:
+1. Install the extension
+2. Press Alt+Q to jump between your two most recent tabs
+3. Customize the shortcut at chrome://extensions/shortcuts if needed
+
+💡 Perfect for:
+• Comparing information between two pages
+• Copying data from one tab to another
+• Quick research and fact-checking
+• Bouncing between work documents
+• Any workflow requiring back-and-forth navigation
+
+⚙️ Advanced Setup:
+Want to use Ctrl+Tab instead? You can modify Chrome's settings file:
+• Windows: Win+R → "notepad %LOCALAPPDATA%\Google\Chrome\User Data\Default\Preferences"
+• Linux: gedit ~/.config/google-chrome/Default/Preferences
+• Change all occurrences of "Alt+Q" to "Ctrl+Tab"
+• Disable Chrome sync to prevent overrides
+
+If the above way doesn't work for you, follow the instructions on this Gist: https://gist.github.com/ilyachase/49c7a6d1aa543d16568520560cfaf226
+
+This extension is free and always will be. However, if you want to buy the author a coffee, it will be much appreciated 🤗
+https://buymeacoffee.com/ilyachase

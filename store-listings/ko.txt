@@ -1,0 +1,34 @@
+⚡ 간단한 키보드 단축키로 가장 최근의 두 탭 간을 즉시 전환하세요 - 창의 Alt+Tab과 같지만 Chrome 탭용입니다!
+
+페이지 비교, 탭 간 정보 복사, 작업 중 빠른 이동에 완벽합니다. 마우스 불필요, 탭을 클릭할 필요 없습니다.
+
+✨ 기능:
+• 간단한 Alt+Q 단축키 (Mac에서는 ⌥Q) - 완전히 사용자 정의 가능
+• 마지막으로 사용한 2개 탭 간 즉시 전환
+• 모든 웹사이트와 페이지에서 작동
+• 가벼우며 빠름 - 성능에 영향 없음
+• 권한 불필요 - 완전히 프라이빗
+
+🚀 사용법:
+1. 확장 프로그램 설치
+2. Alt+Q를 눌러 가장 최근 두 탭 간 이동
+3. 필요시 chrome://extensions/shortcuts에서 단축키 사용자 정의
+
+💡 완벽한 용도:
+• 두 페이지 간 정보 비교
+• 한 탭에서 다른 탭으로 데이터 복사
+• 빠른 조사 및 사실 확인
+• 작업 문서 간 이동
+• 앞뒤 탐색이 필요한 모든 워크플로우
+
+⚙️ 고급 설정:
+대신 Ctrl+Tab을 사용하고 싶으신가요? Chrome 설정 파일을 수정할 수 있습니다:
+• Windows: Win+R → "notepad %LOCALAPPDATA%\Google\Chrome\User Data\Default\Preferences"
+• Linux: gedit ~/.config/google-chrome/Default/Preferences
+• "Alt+Q"의 모든 출현을 "Ctrl+Tab"으로 변경
+• 덮어쓰기 방지를 위해 Chrome 동기화 비활성화
+
+위 방법이 작동하지 않으면 이 Gist의 지침을 따르세요: https://gist.github.com/ilyachase/49c7a6d1aa543d16568520560cfaf226
+
+이 확장 프로그램은 무료이며 항상 무료일 것입니다. 하지만 작성자에게 커피를 사주고 싶으시다면 매우 감사할 것입니다 🤗
+https://buymeacoffee.com/ilyachase

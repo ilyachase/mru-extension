@@ -1,8 +1,8 @@
 {
   "appName": {
-    "message": "Switch between recent tabs (MRU tabs switch)"
+    "message": "Quick Tab Switch"
   },
   "appDesc": {
-    "message": "Use a keyboard shortcut to switch between two most recent tabs."
+    "message": "Instantly switch between your two most recent tabs with Alt+Q. Like Alt+Tab for windows, but for Chrome tabs."
   }
 }

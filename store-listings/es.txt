@@ -1,0 +1,34 @@
+⚡ Cambia instantáneamente entre tus dos pestañas más recientes con un simple atajo de teclado - ¡como Alt+Tab para ventanas, pero para pestañas de Chrome!
+
+Perfecto para comparar páginas, copiar información entre pestañas, o ir y venir rápidamente mientras trabajas. Sin necesidad de ratón, sin hacer clic entre pestañas.
+
+✨ Características:
+• Atajo simple Alt+Q (⌥Q en Mac) - totalmente personalizable
+• Cambia entre tus últimas 2 pestañas usadas instantáneamente
+• Funciona en todos los sitios web y páginas
+• Ligero y rápido - sin impacto en el rendimiento
+• Zero permisos requeridos - completamente privado
+
+🚀 Cómo usar:
+1. Instala la extensión
+2. Presiona Alt+Q para saltar entre tus dos pestañas más recientes
+3. Personaliza el atajo en chrome://extensions/shortcuts si es necesario
+
+💡 Perfecto para:
+• Comparar información entre dos páginas
+• Copiar datos de una pestaña a otra
+• Investigación rápida y verificación de datos
+• Alternar entre documentos de trabajo
+• Cualquier flujo de trabajo que requiera navegación de ida y vuelta
+
+⚙️ Configuración Avanzada:
+¿Quieres usar Ctrl+Tab en su lugar? Puedes modificar el archivo de configuración de Chrome:
+• Windows: Win+R → "notepad %LOCALAPPDATA%\Google\Chrome\User Data\Default\Preferences"
+• Linux: gedit ~/.config/google-chrome/Default/Preferences
+• Cambia todas las ocurrencias de "Alt+Q" a "Ctrl+Tab"
+• Desactiva la sincronización de Chrome para evitar sobrescrituras
+
+Si la forma anterior no funciona para ti, sigue las instrucciones en este Gist: https://gist.github.com/ilyachase/49c7a6d1aa543d16568520560cfaf226
+
+Esta extensión es gratuita y siempre lo será. Sin embargo, si quieres invitarle un café al autor, será muy apreciado 🤗
+https://buymeacoffee.com/ilyachase

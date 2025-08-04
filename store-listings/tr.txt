@@ -1,0 +1,34 @@
+⚡ Basit bir klavye kısayolu ile en son iki sekmeniz arasında anında geçiş yapın - pencereler için Alt+Tab gibi, ama Chrome sekmeleri için!
+
+Sayfaları karşılaştırmak, sekmeler arasında bilgi kopyalamak veya çalışırken hızlıca gidip gelmek için mükemmel. Fare gerekmez, sekmeler arasında tıklama gerekmez.
+
+✨ Özellikler:
+• Basit Alt+Q kısayolu (Mac'te ⌥Q) - tamamen özelleştirilebilir
+• Son kullandığınız 2 sekme arasında anında geçiş
+• Tüm web sitelerinde ve sayfalarda çalışır
+• Hafif ve hızlı - performans etkisi yok
+• Sıfır izin gerekli - tamamen özel
+
+🚀 Nasıl kullanılır:
+1. Uzantıyı yükleyin
+2. En son iki sekmeniz arasında atlama yapmak için Alt+Q'ya basın
+3. Gerekirse chrome://extensions/shortcuts'ta kısayolu özelleştirin
+
+💡 Mükemmel şunlar için:
+• İki sayfa arasında bilgi karşılaştırma
+• Bir sekmeden diğerine veri kopyalama
+• Hızlı araştırma ve gerçek kontrolü
+• Çalışma belgeleri arasında geçiş
+• İleri geri navigasyon gerektiren herhangi bir iş akışı
+
+⚙️ Gelişmiş Kurulum:
+Bunun yerine Ctrl+Tab kullanmak ister misiniz? Chrome'un ayar dosyasını değiştirebilirsiniz:
+• Windows: Win+R → "notepad %LOCALAPPDATA%\Google\Chrome\User Data\Default\Preferences"
+• Linux: gedit ~/.config/google-chrome/Default/Preferences
+• "Alt+Q"nun tüm geçtiği yerleri "Ctrl+Tab" olarak değiştirin
+• Üzerine yazmaları önlemek için Chrome senkronizasyonunu devre dışı bırakın
+
+Yukarıdaki yöntem sizin için işe yaramazsa, bu Gist'teki talimatları takip edin: https://gist.github.com/ilyachase/49c7a6d1aa543d16568520560cfaf226
+
+Bu uzantı ücretsizdir ve her zaman ücretsiz kalacaktır. Ancak, yazara bir kahve ısmarlama istiyorsanız, çok takdir edilecektir 🤗
+https://buymeacoffee.com/ilyachase
