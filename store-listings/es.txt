@@ -1,5 +1,3 @@
-⚡ Cambia instantáneamente entre tus dos pestañas más recientes con un simple atajo de teclado - ¡como Alt+Tab para ventanas, pero para pestañas de Chrome!
-
 Perfecto para comparar páginas, copiar información entre pestañas, o ir y venir rápidamente mientras trabajas. Sin necesidad de ratón, sin hacer clic entre pestañas.
 
 ✨ Características:

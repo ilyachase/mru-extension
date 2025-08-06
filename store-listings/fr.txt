@@ -1,5 +1,3 @@
-⚡ Basculez instantanément entre vos deux onglets les plus récents avec un simple raccourci clavier - comme Alt+Tab pour les fenêtres, mais pour les onglets Chrome !
-
 Parfait pour comparer des pages, copier des informations entre onglets, ou faire des allers-retours rapides pendant le travail. Pas besoin de souris, pas de clic entre les onglets.
 
 ✨ Fonctionnalités :

@@ -1,5 +1,3 @@
-⚡ Alterne instantaneamente entre suas duas abas mais recentes com um simples atalho de teclado - como Alt+Tab para janelas, mas para abas do Chrome!
-
 Perfeito para comparar páginas, copiar informações entre abas, ou alternar rapidamente durante o trabalho. Sem necessidade de mouse, sem clicar entre abas.
 
 ✨ Recursos:

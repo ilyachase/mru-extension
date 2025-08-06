@@ -1,5 +1,3 @@
-⚡ Instantly switch between your two most recent tabs with a simple keyboard shortcut - just like Alt+Tab for windows, but for Chrome tabs!
-
 Perfect for comparing pages, copying information between tabs, or quickly going back and forth while working. No mouse needed, no clicking through tabs.
 
 ✨ Features:

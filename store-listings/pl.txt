@@ -1,5 +1,3 @@
-⚡ Natychmiast przełączaj między dwoma ostatnimi kartami za pomocą prostego skrótu klawiszowego - jak Alt+Tab dla okien, ale dla kart Chrome!
-
 Idealne do porównywania stron, kopiowania informacji między kartami lub szybkiego przechodzenia tam i z powrotem podczas pracy. Nie potrzebujesz myszy, nie musisz klikać między kartami.
 
 ✨ Funkcje:

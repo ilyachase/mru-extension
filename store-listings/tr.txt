@@ -1,5 +1,3 @@
-⚡ Basit bir klavye kısayolu ile en son iki sekmeniz arasında anında geçiş yapın - pencereler için Alt+Tab gibi, ama Chrome sekmeleri için!
-
 Sayfaları karşılaştırmak, sekmeler arasında bilgi kopyalamak veya çalışırken hızlıca gidip gelmek için mükemmel. Fare gerekmez, sekmeler arasında tıklama gerekmez.
 
 ✨ Özellikler:

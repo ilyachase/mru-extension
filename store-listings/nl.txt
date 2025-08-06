@@ -1,5 +1,3 @@
-⚡ Schakel direct tussen je twee meest recente tabbladen met een eenvoudige sneltoets - net als Alt+Tab voor vensters, maar dan voor Chrome-tabbladen!
-
 Perfect voor het vergelijken van pagina's, kopiëren van informatie tussen tabbladen, of snel heen en weer gaan tijdens het werken. Geen muis nodig, geen klikken tussen tabbladen.
 
 ✨ Functies:

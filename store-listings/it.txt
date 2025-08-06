@@ -1,5 +1,3 @@
-⚡ Passa istantaneamente tra le tue due schede più recenti con una semplice scorciatoia da tastiera - come Alt+Tab per le finestre, ma per le schede di Chrome!
-
 Perfetto per confrontare pagine, copiare informazioni tra schede, o andare avanti e indietro rapidamente mentre lavori. Non serve il mouse, non serve cliccare tra le schede.
 
 ✨ Caratteristiche:
