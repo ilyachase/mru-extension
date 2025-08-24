@@ -12,7 +12,13 @@ export default [
     languageOptions: {
       parser: tsparser,
       ecmaVersion: 'latest',
-      sourceType: 'module'
+      sourceType: 'module',
+      globals: {
+        chrome: 'readonly',
+        console: 'readonly',
+        setTimeout: 'readonly',
+        Promise: 'readonly'
+      }
     },
     plugins: {
       '@typescript-eslint': tseslint
@@ -26,7 +32,7 @@ export default [
         caughtErrors: 'none'
       }],
       'no-console': ['warn', { allow: ['log', 'warn', 'error'] }],
-      '@typescript-eslint/prefer-const': 'error',
+      'prefer-const': 'error',
       'no-var': 'error',
       'eqeqeq': ['error', 'always'],
       'curly': ['error', 'all'],
