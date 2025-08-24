@@ -14,7 +14,7 @@ export default defineConfig({
                 assetFileNames: '[name].[ext]'
             }
         },
-        minify: false,
+        minify: true,
         sourcemap: false
     },
     esbuild: {
