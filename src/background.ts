@@ -13,64 +13,77 @@ async function handleTabActivated(tabInfo: chrome.tabs.OnActivatedInfo): Promise
         await wait();
     }
 
-    const result = await chrome.storage.local.get('tabsHistory');
-    const tabsHistory: chrome.tabs.OnActivatedInfo[] = result.tabsHistory;
+    const result = await chrome.storage.local.get('windowTabHistories_v2');
+    const windowTabHistories: { [windowId: number]: number[] } = result.windowTabHistories_v2 || {};
 
-    const foundIndex = tabsHistory.findIndex(
-        (historyTabInfo: chrome.tabs.OnActivatedInfo) => historyTabInfo.tabId === tabInfo.tabId
-    );
-    if (foundIndex !== -1) {
-        tabsHistory.splice(foundIndex, 1);
+    if (!windowTabHistories[tabInfo.windowId]) {
+        windowTabHistories[tabInfo.windowId] = [];
     }
 
-    tabsHistory.unshift(tabInfo);
+    const windowHistory = windowTabHistories[tabInfo.windowId];
+    const foundIndex = windowHistory.findIndex((tabId: number) => tabId === tabInfo.tabId);
 
-    await chrome.storage.local.set({ tabsHistory });
+    if (foundIndex !== -1) {
+        windowHistory.splice(foundIndex, 1);
+    }
+
+    windowHistory.unshift(tabInfo.tabId);
+
+    await chrome.storage.local.set({ windowTabHistories_v2: windowTabHistories });
 }
 
 chrome.runtime.onInstalled.addListener(async () => {
-    const tabsHistory: chrome.tabs.OnActivatedInfo[] = [];
+    const windowTabHistories: { [windowId: number]: number[] } = {};
     const tabInfo = await getCurrentTab();
     if (tabInfo.id !== undefined && tabInfo.windowId !== undefined) {
-        tabsHistory.push({ tabId: tabInfo.id, windowId: tabInfo.windowId });
+        windowTabHistories[tabInfo.windowId] = [tabInfo.id];
     }
 
-    await chrome.storage.local.set({ tabsHistory });
+    await chrome.storage.local.set({ windowTabHistories_v2: windowTabHistories });
 });
 
 chrome.tabs.onActivated.addListener(async (tabInfo: chrome.tabs.OnActivatedInfo) => {
     await handleTabActivated(tabInfo);
 });
 
-chrome.tabs.onRemoved.addListener(async (tabId: number) => {
+chrome.tabs.onRemoved.addListener(async (tabId: number, removeInfo: chrome.tabs.OnRemovedInfo) => {
     while (removingTabInProgress) {
         await wait();
     }
 
     removingTabInProgress = true;
-    const result = await chrome.storage.local.get('tabsHistory');
-    let tabsHistory: chrome.tabs.OnActivatedInfo[] = result.tabsHistory;
+    const result = await chrome.storage.local.get('windowTabHistories_v2');
+    const windowTabHistories: { [windowId: number]: number[] } = result.windowTabHistories_v2 || {};
 
-    tabsHistory = tabsHistory.filter((historyTabInfo: chrome.tabs.OnActivatedInfo) => historyTabInfo.tabId !== tabId);
+    // Remove the tab from its window's history
+    const windowHistory = windowTabHistories[removeInfo.windowId];
+    if (windowHistory) {
+        windowTabHistories[removeInfo.windowId] = windowHistory.filter(
+            (historyTabId: number) => historyTabId !== tabId
+        );
+    }
 
-    await chrome.storage.local.set({ tabsHistory });
+    await chrome.storage.local.set({ windowTabHistories_v2: windowTabHistories });
     removingTabInProgress = false;
 });
 
 chrome.commands.onCommand.addListener(async () => {
-    const result = await chrome.storage.local.get('tabsHistory');
-    const tabsHistory: chrome.tabs.OnActivatedInfo[] = result.tabsHistory;
+    const result = await chrome.storage.local.get('windowTabHistories_v2');
+    const windowTabHistories: { [windowId: number]: number[] } = result.windowTabHistories_v2 || {};
 
-    if (tabsHistory.length < 2) {
+    const currentWindow = await chrome.windows.getCurrent();
+    if (currentWindow.id === undefined) {
         return;
     }
 
-    const currentWindow = await chrome.windows.getCurrent();
-    if (tabsHistory[1].windowId !== currentWindow.id) {
-        await chrome.windows.update(tabsHistory[1].windowId, { focused: true });
+    const currentWindowHistory = windowTabHistories[currentWindow.id];
+
+    if (!currentWindowHistory || currentWindowHistory.length < 2) {
+        return;
     }
 
-    await chrome.tabs.update(tabsHistory[1].tabId, { highlighted: true, active: true });
+    const secondMostRecentTabId = currentWindowHistory[1];
+    await chrome.tabs.update(secondMostRecentTabId, { highlighted: true, active: true });
 });
 
 chrome.windows.onFocusChanged.addListener(

@@ -56,10 +56,10 @@ describe('Background Script', () => {
     });
 
     describe('handleTabActivated function', () => {
-        it('should update tabs history when tab is activated', async () => {
+        it('should update window tab history when tab is activated', async () => {
             const chromeApi = global.chrome as any;
-            // Setup initial history
-            await chromeApi.storage.local.set({ tabsHistory: [] });
+            // Setup initial empty history
+            await chromeApi.storage.local.set({ windowTabHistories_v2: {} });
 
             // Trigger tab activation
             const tabInfo = { tabId: 123, windowId: 456 };
@@ -67,31 +67,31 @@ describe('Background Script', () => {
 
             await vi.runAllTimersAsync();
 
-            const result = await chromeApi.storage.local.get('tabsHistory');
-            expect(result.tabsHistory).toContainEqual(tabInfo);
+            const result = await chromeApi.storage.local.get('windowTabHistories_v2');
+            expect(result.windowTabHistories_v2[456]).toEqual([123]);
         });
 
-        it('should move existing tab to front of history', async () => {
+        it('should move existing tab to front of window history', async () => {
             const chromeApi = global.chrome as any;
-            const existingHistory = [
-                { tabId: 123, windowId: 456 },
-                { tabId: 789, windowId: 456 }
-            ];
-            await chromeApi.storage.local.set({ tabsHistory: existingHistory });
+            const existingHistory = {
+                456: [123, 789]
+            };
+            await chromeApi.storage.local.set({ windowTabHistories_v2: existingHistory });
 
             // Activate existing tab
             chromeApi.tabs.onActivated.trigger({ tabId: 789, windowId: 456 });
             await vi.runAllTimersAsync();
 
-            const result = await chromeApi.storage.local.get('tabsHistory');
-            expect(result.tabsHistory[0]).toEqual({ tabId: 789, windowId: 456 });
-            expect(result.tabsHistory).toHaveLength(2);
+            const result = await chromeApi.storage.local.get('windowTabHistories_v2');
+            expect(result.windowTabHistories_v2[456][0]).toEqual(789);
+            expect(result.windowTabHistories_v2[456]).toHaveLength(2);
+            expect(result.windowTabHistories_v2[456]).toEqual([789, 123]);
         });
 
         it('should wait when removing tab is in progress', async () => {
             const chromeApi = global.chrome as any;
             // First trigger tab removal to set removingTabInProgress = true
-            chromeApi.tabs.onRemoved.trigger(123);
+            chromeApi.tabs.onRemoved.trigger(123, { windowId: 1 });
 
             // Then trigger tab activation (should wait)
             chromeApi.tabs.onActivated.trigger({ tabId: 456, windowId: 1 });
@@ -107,7 +107,7 @@ describe('Background Script', () => {
     });
 
     describe('chromeApi.runtime.onInstalled', () => {
-        it('should initialize tabs history on install', async () => {
+        it('should initialize window tab history on install', async () => {
             const chromeApi = global.chrome as any;
             const mockTab = { id: 123, windowId: 456 };
             chromeApi.tabs.query.mockResolvedValueOnce([mockTab]);
@@ -115,11 +115,8 @@ describe('Background Script', () => {
             chromeApi.runtime.onInstalled.trigger();
             await vi.runAllTimersAsync();
 
-            const result = await chromeApi.storage.local.get('tabsHistory');
-            expect(result.tabsHistory).toContainEqual({
-                tabId: 123,
-                windowId: 456
-            });
+            const result = await chromeApi.storage.local.get('windowTabHistories_v2');
+            expect(result.windowTabHistories_v2[456]).toEqual([123]);
         });
 
         it('should handle tabs without id or windowId', async () => {
@@ -130,67 +127,66 @@ describe('Background Script', () => {
             chromeApi.runtime.onInstalled.trigger();
             await vi.runAllTimersAsync();
 
-            const result = await chromeApi.storage.local.get('tabsHistory');
-            expect(result.tabsHistory).toEqual([]);
+            const result = await chromeApi.storage.local.get('windowTabHistories_v2');
+            expect(result.windowTabHistories_v2).toEqual({});
         });
     });
 
     describe('chromeApi.tabs.onRemoved', () => {
-        it('should remove tab from history when tab is closed', async () => {
+        it('should remove tab from window history when tab is closed', async () => {
             const chromeApi = global.chrome as any;
-            const initialHistory = [
-                { tabId: 123, windowId: 456 },
-                { tabId: 789, windowId: 456 }
-            ];
-            await chromeApi.storage.local.set({ tabsHistory: initialHistory });
+            const initialHistory = {
+                456: [123, 789]
+            };
+            await chromeApi.storage.local.set({ windowTabHistories_v2: initialHistory });
 
-            chromeApi.tabs.onRemoved.trigger(123);
+            chromeApi.tabs.onRemoved.trigger(123, { windowId: 456 });
             await vi.runAllTimersAsync();
 
-            const result = await chromeApi.storage.local.get('tabsHistory');
-            expect(result.tabsHistory).toEqual([{ tabId: 789, windowId: 456 }]);
+            const result = await chromeApi.storage.local.get('windowTabHistories_v2');
+            expect(result.windowTabHistories_v2[456]).toEqual([789]);
         });
 
         it('should handle removing non-existent tab gracefully', async () => {
             const chromeApi = global.chrome as any;
-            const initialHistory = [{ tabId: 123, windowId: 456 }];
-            await chromeApi.storage.local.set({ tabsHistory: initialHistory });
+            const initialHistory = {
+                456: [123]
+            };
+            await chromeApi.storage.local.set({ windowTabHistories_v2: initialHistory });
 
-            chromeApi.tabs.onRemoved.trigger(999); // Non-existent tab
+            chromeApi.tabs.onRemoved.trigger(999, { windowId: 456 }); // Non-existent tab
             await vi.runAllTimersAsync();
 
-            const result = await chromeApi.storage.local.get('tabsHistory');
-            expect(result.tabsHistory).toEqual(initialHistory);
+            const result = await chromeApi.storage.local.get('windowTabHistories_v2');
+            expect(result.windowTabHistories_v2[456]).toEqual([123]);
         });
 
         it('should wait for ongoing removal operations', async () => {
             const chromeApi = global.chrome as any;
-            const initialHistory = [
-                { tabId: 123, windowId: 456 },
-                { tabId: 789, windowId: 456 }
-            ];
-            await chromeApi.storage.local.set({ tabsHistory: initialHistory });
+            const initialHistory = {
+                456: [123, 789]
+            };
+            await chromeApi.storage.local.set({ windowTabHistories_v2: initialHistory });
 
             // Trigger two removals simultaneously
-            const removal1 = chromeApi.tabs.onRemoved.trigger(123);
-            const removal2 = chromeApi.tabs.onRemoved.trigger(789);
+            const removal1 = chromeApi.tabs.onRemoved.trigger(123, { windowId: 456 });
+            const removal2 = chromeApi.tabs.onRemoved.trigger(789, { windowId: 456 });
 
             vi.advanceTimersByTime(100);
             await vi.runAllTimersAsync();
 
-            const result = await chromeApi.storage.local.get('tabsHistory');
-            expect(result.tabsHistory).toEqual([]);
+            const result = await chromeApi.storage.local.get('windowTabHistories_v2');
+            expect(result.windowTabHistories_v2[456]).toEqual([]);
         });
     });
 
     describe('chromeApi.commands.onCommand', () => {
-        it('should switch to previous tab when history has 2+ tabs', async () => {
+        it('should switch to previous tab when window history has 2+ tabs', async () => {
             const chromeApi = global.chrome as any;
-            const history = [
-                { tabId: 123, windowId: 456 },
-                { tabId: 789, windowId: 456 }
-            ];
-            await chromeApi.storage.local.set({ tabsHistory: history });
+            const history = {
+                456: [123, 789]
+            };
+            await chromeApi.storage.local.set({ windowTabHistories_v2: history });
             chromeApi.windows.getCurrent.mockResolvedValueOnce({ id: 456 });
 
             chromeApi.commands.onCommand.trigger();
@@ -202,9 +198,13 @@ describe('Background Script', () => {
             });
         });
 
-        it('should not switch when history has less than 2 tabs', async () => {
+        it('should not switch when window history has less than 2 tabs', async () => {
             const chromeApi = global.chrome as any;
-            await chromeApi.storage.local.set({ tabsHistory: [{ tabId: 123, windowId: 456 }] });
+            const history = {
+                456: [123]
+            };
+            await chromeApi.storage.local.set({ windowTabHistories_v2: history });
+            chromeApi.windows.getCurrent.mockResolvedValueOnce({ id: 456 });
 
             chromeApi.commands.onCommand.trigger();
             await vi.runAllTimersAsync();
@@ -212,42 +212,32 @@ describe('Background Script', () => {
             expect(chromeApi.tabs.update).not.toHaveBeenCalled();
         });
 
-        it('should switch windows when target tab is in different window', async () => {
+        it('should not switch when current window is undefined', async () => {
             const chromeApi = global.chrome as any;
-            const history = [
-                { tabId: 123, windowId: 456 },
-                { tabId: 789, windowId: 999 } // Different window
-            ];
-            await chromeApi.storage.local.set({ tabsHistory: history });
-            chromeApi.windows.getCurrent.mockResolvedValueOnce({ id: 456 });
+            const history = {
+                456: [123, 789]
+            };
+            await chromeApi.storage.local.set({ windowTabHistories_v2: history });
+            chromeApi.windows.getCurrent.mockResolvedValueOnce({ id: undefined });
 
             chromeApi.commands.onCommand.trigger();
             await vi.runAllTimersAsync();
 
-            expect(chromeApi.windows.update).toHaveBeenCalledWith(999, { focused: true });
-            expect(chromeApi.tabs.update).toHaveBeenCalledWith(789, {
-                highlighted: true,
-                active: true
-            });
+            expect(chromeApi.tabs.update).not.toHaveBeenCalled();
         });
 
-        it('should not switch windows when target tab is in same window', async () => {
+        it('should not switch when current window has no history', async () => {
             const chromeApi = global.chrome as any;
-            const history = [
-                { tabId: 123, windowId: 456 },
-                { tabId: 789, windowId: 456 } // Same window
-            ];
-            await chromeApi.storage.local.set({ tabsHistory: history });
+            const history = {
+                999: [123, 789] // Different window has history
+            };
+            await chromeApi.storage.local.set({ windowTabHistories_v2: history });
             chromeApi.windows.getCurrent.mockResolvedValueOnce({ id: 456 });
 
             chromeApi.commands.onCommand.trigger();
             await vi.runAllTimersAsync();
 
-            expect(chromeApi.windows.update).not.toHaveBeenCalled();
-            expect(chromeApi.tabs.update).toHaveBeenCalledWith(789, {
-                highlighted: true,
-                active: true
-            });
+            expect(chromeApi.tabs.update).not.toHaveBeenCalled();
         });
     });
 
@@ -277,25 +267,29 @@ describe('Background Script', () => {
         it('should handle when no tab is found', async () => {
             const chromeApi = global.chrome as any;
             chromeApi.tabs.query.mockResolvedValueOnce([]);
+            // Initialize empty storage to match expected behavior
+            await chromeApi.storage.local.set({ windowTabHistories_v2: {} });
 
             chromeApi.windows.onFocusChanged.trigger(456);
             await vi.runAllTimersAsync();
 
-            // Should not crash or throw
-            const result = await chromeApi.storage.local.get('tabsHistory');
-            expect(result.tabsHistory).toEqual([]);
+            // Should not crash or throw, and storage should remain empty
+            const result = await chromeApi.storage.local.get('windowTabHistories_v2');
+            expect(result.windowTabHistories_v2).toEqual({});
         });
 
         it('should handle tabs without id or windowId on focus change', async () => {
             const chromeApi = global.chrome as any;
             const mockTab = { active: true }; // Missing id and windowId
             chromeApi.tabs.query.mockResolvedValueOnce([mockTab]);
+            // Initialize empty storage to match expected behavior
+            await chromeApi.storage.local.set({ windowTabHistories_v2: {} });
 
             chromeApi.windows.onFocusChanged.trigger(456);
             await vi.runAllTimersAsync();
 
-            const result = await chromeApi.storage.local.get('tabsHistory');
-            expect(result.tabsHistory).toEqual([]);
+            const result = await chromeApi.storage.local.get('windowTabHistories_v2');
+            expect(result.windowTabHistories_v2).toEqual({});
         });
     });
 });
