@@ -1,3 +1,4 @@
+// eslint-disable-next-line prefer-const
 let removingTabInProgress = false, debug = false;
 
 const wait = () =>
@@ -6,8 +7,8 @@ const wait = () =>
     );
 
 async function getCurrentTab() {
-    let queryOptions = {active: true, currentWindow: true};
-    let [tab] = await chrome.tabs.query(queryOptions);
+    const queryOptions = {active: true, currentWindow: true};
+    const [tab] = await chrome.tabs.query(queryOptions);
     return tab;
 }
 
@@ -42,7 +43,7 @@ chrome.runtime.onInstalled.addListener(async () => {
         console.log('Extension installed');
     }
 
-    let tabsHistory = [];
+    const tabsHistory = [];
     await getCurrentTab().then(tabInfo => tabsHistory.push({tabId: tabInfo.id, windowId: tabInfo.windowId}));
     if (debug) {
         console.log('onInstalled', tabsHistory);
@@ -114,7 +115,7 @@ chrome.windows.onFocusChanged.addListener(async function (windowId) {
         console.log('Window focused: ' + windowId);
     }
 
-    let tabInfo = await getCurrentTab();
+    const tabInfo = await getCurrentTab();
     if (!tabInfo) {
         if (debug) {
             console.log('No tab found');
