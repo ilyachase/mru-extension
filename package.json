@@ -4,12 +4,17 @@
   "description": "⚡ Instantly switch between your two most recent tabs with Alt+Q. Like Alt+Tab for windows, but for Chrome tabs!",
   "type": "module",
   "scripts": {
-    "lint:fix": "eslint *.js --ext .js --fix",
-    "package": "powershell -Command \"if (Test-Path 'quick-tab-switch-extension.zip') { Remove-Item -Path 'quick-tab-switch-extension.zip' -Force }\" && powershell -Command \"Compress-Archive -Path 'manifest.json','background.js','icon.png','_locales','store-listings' -DestinationPath 'quick-tab-switch-extension.zip' -Force\""
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "lint:fix": "eslint src/ --ext .ts --fix",
+    "package": "npm run build && rm -f chrome-extension.zip && zip -r chrome-extension.zip manifest.json build icon.png _locales"
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
+    "@types/chrome": "^0.1.4",
+    "@typescript-eslint/eslint-plugin": "^8.15.0",
+    "@typescript-eslint/parser": "^8.15.0",
     "eslint": "^9.33.0",
-    "@types/chrome": "^0.1.4"
+    "vite": "^7.1.3"
   }
 }

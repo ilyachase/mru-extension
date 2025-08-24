@@ -5,7 +5,7 @@
   "version": "1.5.0",
   "manifest_version": 3,
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "build/background.js"
   },
   "permissions": [
     "storage"
