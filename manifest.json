@@ -1,17 +1,27 @@
 {
-    "name": "__MSG_appName__",
-    "description": "__MSG_appDesc__",
-    "default_locale": "en",
-    "version": "1.5.0",
-    "manifest_version": 3,
-    "background": {
-        "service_worker": "build/background.js"
-    },
-    "permissions": ["storage"],
-    "commands": {
-        "inject-script": {
-            "suggested_key": "Alt+Q",
-            "description": "Switch to the previous tab"
-        }
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "version": "1.5.0",
+  "manifest_version": 3,
+  "icons": {
+    "16": "icons/icon-16.png",
+    "19": "icons/icon-19.png",
+    "32": "icons/icon-32.png",
+    "38": "icons/icon-38.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "background": {
+    "service_worker": "build/background.js"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "commands": {
+    "inject-script": {
+      "suggested_key": "Alt+Q",
+      "description": "Switch to the previous tab"
     }
+  }
 }

@@ -9,7 +9,7 @@
     "lint:fix": "biome check --write src/",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "package": "npm run build && rm -f chrome-extension.zip && zip -r chrome-extension.zip manifest.json build icon.png _locales"
+    "package": "npm run build && rm -f chrome-extension.zip && zip -r chrome-extension.zip manifest.json build icons _locales"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.2.2",
