@@ -67,12 +67,14 @@ export const chrome = {
         query: vi.fn().mockResolvedValue([{ id: 1, windowId: 1, active: true }]),
         update: vi.fn().mockResolvedValue(undefined),
         onActivated: new MockEventTarget<(activeInfo: { tabId: number; windowId: number }) => void>(),
-        onRemoved: new MockEventTarget<(tabId: number) => void>()
+        onRemoved: new MockEventTarget<(tabId: number, removeInfo: { windowId: number; isWindowClosing: boolean }) => void>()
     },
     windows: {
         getCurrent: vi.fn().mockResolvedValue({ id: 1, focused: true }),
+        getAll: vi.fn().mockResolvedValue([{ id: 1, focused: true }]),
         update: vi.fn().mockResolvedValue(undefined),
-        onFocusChanged: new MockEventTarget<(windowId: number, filters?: any) => void>()
+        onFocusChanged: new MockEventTarget<(windowId: number, filters?: any) => void>(),
+        onRemoved: new MockEventTarget<(windowId: number) => void>()
     },
     storage: {
         local: mockStorage

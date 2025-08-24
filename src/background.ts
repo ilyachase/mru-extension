@@ -29,6 +29,23 @@ async function handleTabActivated(tabInfo: chrome.tabs.OnActivatedInfo): Promise
 
     windowHistory.unshift(tabInfo.tabId);
 
+    if (windowHistory.length > 100) {
+        windowHistory.splice(100);
+    }
+
+    const trackedWindowCount = Object.keys(windowTabHistories).length;
+    if (trackedWindowCount > 100) {
+        const allWindows = await chrome.windows.getAll();
+        const existingWindowIds = new Set(allWindows.map((window) => window.id).filter((id) => id !== undefined));
+
+        for (const windowId in windowTabHistories) {
+            const id = parseInt(windowId, 10);
+            if (!existingWindowIds.has(id)) {
+                delete windowTabHistories[id];
+            }
+        }
+    }
+
     await chrome.storage.local.set({ windowTabHistories_v2: windowTabHistories });
 }
 
@@ -55,7 +72,6 @@ chrome.tabs.onRemoved.addListener(async (tabId: number, removeInfo: chrome.tabs.
     const result = await chrome.storage.local.get('windowTabHistories_v2');
     const windowTabHistories: { [windowId: number]: number[] } = result.windowTabHistories_v2 || {};
 
-    // Remove the tab from its window's history
     const windowHistory = windowTabHistories[removeInfo.windowId];
     if (windowHistory) {
         windowTabHistories[removeInfo.windowId] = windowHistory.filter(
@@ -103,3 +119,13 @@ chrome.windows.onFocusChanged.addListener(
     },
     { windowTypes: ['normal'] }
 );
+
+chrome.windows.onRemoved.addListener(async (windowId: number) => {
+    const result = await chrome.storage.local.get('windowTabHistories_v2');
+    const windowTabHistories: { [windowId: number]: number[] } = result.windowTabHistories_v2 || {};
+
+    if (windowTabHistories[windowId]) {
+        delete windowTabHistories[windowId];
+        await chrome.storage.local.set({ windowTabHistories_v2: windowTabHistories });
+    }
+});
