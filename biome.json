@@ -1,0 +1,35 @@
+{
+    "linter": {
+        "enabled": true,
+        "rules": {
+            "recommended": true,
+            "suspicious": {
+                "noExplicitAny": "error"
+            },
+            "style": {
+                "useConst": "error"
+            },
+            "correctness": {
+                "noUnusedVariables": {
+                    "level": "error",
+                    "options": {
+                        "ignoreRestSiblings": true
+                    }
+                }
+            }
+        }
+    },
+    "formatter": {
+        "enabled": true,
+        "indentStyle": "space",
+        "indentWidth": 4,
+        "lineWidth": 120
+    },
+    "javascript": {
+        "formatter": {
+            "quoteStyle": "single",
+            "semicolons": "always",
+            "trailingCommas": "none"
+        }
+    }
+}
