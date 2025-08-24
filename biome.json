@@ -19,6 +19,9 @@
             }
         }
     },
+    "files": {
+        "includes": ["src/**/*"]
+    },
     "formatter": {
         "enabled": true,
         "indentStyle": "space",

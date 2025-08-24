@@ -23,9 +23,20 @@ export default defineConfig({
             'top-level-await': false
         }
     },
-    resolve: {
-        alias: {
-            '@': resolve(__dirname, 'src')
-        }
+      resolve: {
+    alias: {
+      '@': resolve(__dirname, 'src')
     }
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: ['tests/vitest.setup.ts'],
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'html', 'lcov'],
+      include: ['src/**/*.ts'],
+      exclude: ['tests/**/*']
+    }
+  }
 });
